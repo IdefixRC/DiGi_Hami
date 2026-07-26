@@ -2,8 +2,6 @@
 
 ![DiGi Hami](images/digihami_hero.png)
 
-> _Add your hero product photo at `images/digihami_hero.png`_
-
 ## 1. What is DiGi Hami?
 
 **Meet DiGi Hami — the pet that never dies, never smells, and never plots its escape.** 🐹
