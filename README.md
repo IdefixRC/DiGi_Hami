@@ -161,13 +161,11 @@ Connect the ESP32-C3 Super Mini to the GC9A01 display with **7 female-to-female 
 
 ![ESP32-C3 Super Mini](images/esp32_c3_supermini.png)
 
-> _Add a photo of the board at `images/esp32_c3_supermini.png`_
 
 **GC9A01 1.28″ Round Display (240×240)**
 
 ![GC9A01 Display](images/gc9a01_display.png)
 
-> _Add a photo of the display at `images/gc9a01_display.png`_
 
 ### Why these pins?
 
