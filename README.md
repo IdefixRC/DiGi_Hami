@@ -38,7 +38,7 @@ Print it, wire it, flash it — and adopt a hamster that's guaranteed to outlive
 2. **Mount the display into the 3D-printed wheel.** Seat the round GC9A01 display into the wheel. If it isn't snug, secure it with a dab of **hot glue** or a bit of **duct tape**.
 3. **Glue the wheel to the tray cover.** Use the alignment **pins** to position it correctly, then glue it down.
 4. **Add the bedding texture.** Spread **white glue** over the tray cover plate, sprinkle your chosen bedding on top, and press it in place. Repeat for a second layer if needed — but keep it thin, or it will stick out past the tray sides. Once dry, **trim** any overhang.
-5. **Prepare the ESP32.** Flash the firmware — see [Chapter 4](#4-flashing-the-esp32-beginner-friendly) below. _(And don't forget to leave a like 👍)_
+5. **Prepare the ESP32.** Flash the firmware — see [Chapter 4](#4-flashing-the-esp32-beginner-friendly) below. _(And don't forget to follow me on Github 👍)_
 6. **Connect the ESP32 to the display.** Wire it up as shown in [Chapter 5](#5-wiring). **Route the Dupont wires through the slot in the tray cover *before* you connect them** to the display and ESP32.
 7. **Apply power, let him run, enjoy!!!** 🎉 Plug in the USB-C cable and watch your hamster spin. _(Post a picture of your creation, and if you'd like, leave a like / drop a bump 🙏)_
 
