@@ -15,7 +15,7 @@ Print it, wire it, flash it — and adopt a hamster that's guaranteed to outlive
 
 **No feeding required. Active 24×7. Zero maintenance. Infinite floof.**
 
-Thanks to [jknoepfel](https://github.com/jeremyknoepfel/hamster-wheel) and xxx (placeholder as I need to find the TikTok video again) for the basic model and inspiration for this excellent model.
+Thanks to [deadpoh](https://www.instagram.com/_deadpohl_/) and [jknoepfel](https://github.com/jeremyknoepfel/hamster-wheel) for the basic model and inspiration for this excellent model.
 I have expanded on the original design by improving the model with a slimmer mesh, self-centering cage, tray with a cover, wheel mount and cable cutouts, and by porting the code to an ESP32 C3 Super Mini .
 
 ---
