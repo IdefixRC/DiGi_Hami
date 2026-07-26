@@ -5,10 +5,11 @@
 ## 1. What is DiGi Hami?
 
 **Meet DiGi Hami — the pet that never dies, never smells, and never plots its escape.** 🐹
+(Beginner-friendly - detailed instructions below, no soldering required)
 
 Say hello to the world's lowest-maintenance companion. DiGi Hami is a fully digital hamster who lives his best life on a tiny screen inside a real 3D-printed cage — running on his wheel 24/7 without ever asking for a snack, a vet visit, or a single cage cleaning.
 
-Powered by a cheap little ESP32 and a display (plus a few printed parts and some light soldering), he's the perfect desk buddy for anyone who wants the joy of a pet without the sad goodbye, the allergy sneezes, or the 3 a.m. wheel-squeaking. He won't bite. He won't hibernate on you. He won't stage a daring bedding-flinging breakout while you're on a video call.
+Powered by a cheap little ESP32 and a display (plus a few printed parts), he's the perfect desk buddy for anyone who wants the joy of a pet without the sad goodbye, the allergy sneezes, or the 3 a.m. wheel-squeaking. He won't bite. He won't hibernate on you. He won't stage a daring bedding-flinging breakout while you're on a video call.
 
 Print it, wire it, flash it — and adopt a hamster that's guaranteed to outlive your houseplants.
 
