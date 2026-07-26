@@ -24,7 +24,7 @@ I have expanded on the original design by improving the model with a slimmer mes
 
 | # | Component | Notes | Link |
 |---|-----------|-------|------|
-| 1 | **3D printed parts** | All the printed files for the cage, wheel and tray | Download from the [MakerWorld project page](#) |
+| 1 | **3D printed parts** | All the printed files for the cage, wheel and tray | Download from the [MakerWorld project page](https://makerworld.com/en/models/3096322-digi-hami-your-digital-desk-hamster-companion) |
 | 2 | **ESP32-C3 Super Mini board** | Get the **pre-soldered (with headers)** version | [AliExpress](https://www.aliexpress.com/item/1005012450719334.html) |
 | 3 | **GC9A01 SPI 1.28″ Round Display, 240×240** | Select the **"1.28 TFT Round"** option | [AliExpress](https://www.aliexpress.com/item/1005008284550510.html) |
 | 4 | **Dupont jumper wires, 10 cm, Female-to-Female** | **Minimum 7 needed** — the linked pack includes 40 | [AliExpress](https://www.aliexpress.com/item/1005008005675778.html) |
