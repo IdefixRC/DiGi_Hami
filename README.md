@@ -19,9 +19,9 @@ Thanks to [deadpoh](https://www.instagram.com/_deadpohl_/) and [jknoepfel](https
 I have expanded on the original design by improving the model with a slimmer mesh, self-centering cage, tray with a cover, wheel mount and cable cutouts, and by porting the code to an ESP32 C3 Super Mini .
 
 **No feeding required. Active 24×7. Zero maintenance. Infinite floof.**
-
+<p align="center">
 ![Speedy & Jerry](images/Speedy%20%26%20Jerry.png)
-
+</p>
 ---
 
 ## 2. Required Components
