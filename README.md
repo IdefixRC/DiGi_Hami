@@ -20,7 +20,7 @@ I have expanded on the original design by improving the model with a slimmer mes
 
 **No feeding required. Active 24×7. Zero maintenance. Infinite floof.**
 
-![Speedy & Jerry](images/Speedy & Jerry.png)
+![Speedy & Jerry](images/Speedy%20%26%20Jerry.png)
 
 ---
 
