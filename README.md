@@ -23,6 +23,7 @@ I have expanded on the original design by improving the model with a slimmer mes
 <p align="center">
   <img src="images/Speedy%20%26%20Jerry.png" alt="Speedy & Jerry">
 </p>
+
 ---
 
 ## 2. Required Components
