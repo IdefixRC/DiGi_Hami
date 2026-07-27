@@ -57,14 +57,26 @@ I have expanded on the original design by improving the model with a slimmer mes
 
 This guide assumes you have **never used VS Code or PlatformIO before**. Follow every step in order.
 
-### 4.1 Install VS Code
+### 4.1 Download the DiGi Hami Project Files
+
+First, grab the code and the animation from this GitHub page.
+
+1. At the **top of this GitHub page**, click the green **`< > Code`** button, then choose **Download ZIP**.
+   - _(Alternatively, if you use Git, run `git clone <repository-url>` in a terminal.)_
+2. **Unzip** the downloaded file to somewhere easy to find, e.g. your Desktop. This gives you a project folder (for example `DiGi-Hami-main`) containing:
+   - **`main.cpp`** — the firmware code
+   - the **`data/`** folder — which contains **`animation.gif`** (the hamster animation)
+   - this **`README.md`** and the `images/` folder
+3. **Remember where you unzipped this folder** — you'll copy the `main.cpp` file and the whole `data/` folder out of it in the steps below. Throughout the rest of this chapter, this unzipped folder is referred to as your **downloaded project folder**.
+
+### 4.2 Install VS Code
 
 1. Go to **https://code.visualstudio.com/**.
 2. Download the installer for your operating system (Windows / macOS / Linux) and run it.
 3. On Windows, accept the defaults — it's helpful to tick **"Add to PATH"** and **"Add 'Open with Code' action"** during install.
 4. Launch **Visual Studio Code** once it's installed.
 
-### 4.2 Install the PlatformIO Extension
+### 4.3 Install the PlatformIO Extension
 
 PlatformIO is the tool that compiles the code and uploads it to the board.
 
@@ -74,7 +86,7 @@ PlatformIO is the tool that compiles the code and uploads it to the board.
 4. Wait for it to finish (it downloads a toolchain in the background — this can take a few minutes). When prompted, **reload / restart VS Code**.
 5. After restarting, you'll see a small **ant/alien head icon** 🐜 in the left sidebar — that's PlatformIO Home.
 
-### 4.3 Create the Project
+### 4.4 Create the Project
 
 1. Click the **PlatformIO icon** → **Open** → **New Project**.
 2. Fill in the wizard:
@@ -84,7 +96,7 @@ PlatformIO is the tool that compiles the code and uploads it to the board.
    - Leave the location default (or pick your own folder).
 3. Click **Finish** and wait for PlatformIO to set up the project (first run downloads the ESP32 platform — give it a few minutes).
 
-### 4.4 Configure `platformio.ini`
+### 4.5 Configure `platformio.ini`
 
 In the project file list (left sidebar), open **`platformio.ini`** and replace its contents with:
 
@@ -109,34 +121,35 @@ lib_deps =
 
 > The two `build_flags` are important: they enable **USB CDC on boot** so the C3 shows up as a serial port and prints its `Serial` output over USB. The `lib_deps` lines make PlatformIO automatically download the three libraries the code needs (Adafruit GFX, Adafruit GC9A01A, and AnimatedGIF) — no manual library installation required.
 
-### 4.5 Add the Firmware Code
+### 4.6 Add the Firmware Code
 
-1. In the file list, open the **`src/`** folder and open **`main.cpp`**.
-2. Delete the placeholder contents and **paste the full DiGi Hami sketch** (`main.cpp` in this repository).
-3. Save the file (`Ctrl+S`).
+1. In the PlatformIO project's file list, open the **`src/`** folder and open **`main.cpp`**.
+2. Delete the placeholder contents.
+3. Open the **`main.cpp`** from your **downloaded project folder** (from step 4.1), copy **all** of its contents, and **paste** them into the `src/main.cpp` in your PlatformIO project.
+4. Save the file (`Ctrl+S`).
 
-### 4.6 Add the Animation (SPIFFS)
+### 4.7 Add the Animation (SPIFFS)
 
-The hamster animation is a GIF that must be uploaded to the board's flash filesystem separately from the code.
+The hamster animation is a GIF that must be uploaded to the board's flash filesystem separately from the code. It's already included in the files you downloaded in step 4.1.
 
-1. In your project's **root folder** (same level as `src`), create a folder named exactly **`data`**.
-2. Put your animation inside it, named exactly **`animation.gif`** → so the path is `data/animation.gif`.
-   - The display is **240×240**, so the GIF looks best if it is 240×240 (or smaller). Keep the file size modest so it fits in flash.
+1. Open your **downloaded project folder** (from step 4.1) and locate the **`data`** folder inside it — it contains **`animation.gif`**.
+2. **Copy that entire `data` folder** into your PlatformIO project's **root folder** (the same level as `src`), so the animation ends up at `data/animation.gif`.
+   - _(If you'd rather use your own animation, just replace `animation.gif` — keep the exact filename. The display is **240×240**, so the GIF looks best at 240×240 or smaller; keep the file size modest so it fits in flash.)_
 3. Upload it: click the **PlatformIO icon** → under **Project Tasks → esp32-c3-supermini → Platform**, click **"Upload Filesystem Image"**.
    - _(The board must be connected via USB-C for this step.)_
 
-### 4.7 Connect the Board and Upload the Code
+### 4.8 Connect the Board and Upload the Code
 
 1. Plug the ESP32-C3 Super Mini into your computer with the **USB-C cable**. Use a **data-capable** cable, not a charge-only one.
 2. In the blue bottom bar of VS Code, click the **→ (right arrow) "Upload"** button, or press `Ctrl+Alt+U`.
 3. PlatformIO compiles the code and flashes it automatically. When you see **`SUCCESS`** in the terminal, it's done.
 4. Open the **Serial Monitor** (plug icon in the bottom bar) to watch the log at **115200 baud** — you should see messages like `SPIFFS initialized successfully!` and `Display initialized successfully!`.
 
-### 4.8 Troubleshooting
+### 4.9 Troubleshooting
 
 - **No serial port / upload fails:** Try a different USB-C cable (many are charge-only). On the C3 Super Mini you can force bootloader mode: **hold BOOT, tap RESET, release BOOT**, then upload.
 - **Nothing on screen but uploads work:** Double-check the wiring in [Chapter 5](#5-wiring), and if your module has a **BLK** pin, wire it to **3V3**.
-- **`Failed to open GIF file!`:** You forgot step 4.6 — run **"Upload Filesystem Image"** and make sure the file is named exactly `animation.gif`.
+- **`Failed to open GIF file!`:** You forgot step 4.7 — copy the `data` folder into the project and run **"Upload Filesystem Image"**, and make sure the file is named exactly `animation.gif`.
 - **Serial shows nothing:** Confirm `ARDUINO_USB_CDC_ON_BOOT=1` is in `platformio.ini` (it's already in the config above).
 
 ---
