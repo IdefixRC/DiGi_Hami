@@ -1,6 +1,6 @@
 # 🐹 DiGi Hami — Your Digital Desk Companion
 
-![DiGi Hami](images/digihami_hero.png)
+![DiGi Hami](images/digihami_hero.jpg)
 
 ## 1. What is DiGi Hami?
 
@@ -12,6 +12,8 @@ Say hello to the world's lowest-maintenance companion. DiGi Hami is a fully digi
 Powered by a cheap little ESP32 and a display (plus a few printed parts), he's the perfect desk buddy for anyone who wants the joy of a pet without the sad goodbye, the allergy sneezes, or the 3 a.m. wheel-squeaking. He won't bite. He won't hibernate on you. He won't stage a daring bedding-flinging breakout while you're on a video call.
 
 Print it, wire it, flash it — and adopt a hamster that's guaranteed to outlive your houseplants.
+
+![DiGi Hami Animation](images/DIGI-HAMI.webp)
 
 **No feeding required. Active 24×7. Zero maintenance. Infinite floof.**
 
@@ -132,8 +134,8 @@ Throughout the rest of this chapter, this unzipped folder is your **DiGi Hami pr
 2. Open the **pioarduino icon** in the left sidebar → **Project Tasks → esp32-c3-supermini → Platform** → click **"Upload Filesystem Image"**.
 
    ![pioarduino Project Tasks → Platform → Upload Filesystem Image](images/pio-project-tasks.png)
-
    - _(Equivalent terminal command: `pio run -t uploadfs`.)_
+
 3. Re-open the Serial Monitor and confirm `Successfully opened GIF`.
 
 > _Want your own animation? Replace `data/animation.gif` with your file — keep the exact name `animation.gif`. The display is **240×240**, so design for 240×240 or smaller and keep the file small so it fits in flash. Then upload again (step 4.6), or use the fallback above._
