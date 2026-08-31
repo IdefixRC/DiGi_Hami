@@ -13,7 +13,9 @@ Powered by a cheap little ESP32 and a display (plus a few printed parts), he's t
 
 Print it, wire it, flash it — and adopt a hamster that's guaranteed to outlive your houseplants.
 
-![DiGi Hami Animation](images/DIGI-HAMI.webp)
+<p align="center">
+  <img src="images/DIGI-HAMI.webp" alt="DiGi Hami Animation">
+</p>
 
 **No feeding required. Active 24×7. Zero maintenance. Infinite floof.**
 
