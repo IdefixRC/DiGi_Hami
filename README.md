@@ -56,19 +56,24 @@ I have expanded on the original design by improving the model with a slimmer mes
 
 ## 4. Flashing the ESP32 (Beginner-Friendly)
 
-This guide assumes you have **never used VS Code or PlatformIO before**. Follow every step in order.
+This guide assumes you have **never used VS Code or pioarduino before**. Follow every step in order.
 
-### 4.1 Download the DiGi Hami Project Files
+> **How this differs from a typical ESP32 project:** the V1.0 download is already a complete, ready-to-open project. You don't create anything or paste any code — you open the folder, plug in the board, and click **Upload** once. The hamster animation is flashed automatically as part of that same click.
 
-First, grab the code and the animation from this GitHub page.
+### 4.1 Download the DiGi Hami Release
 
-1. At the **top of this GitHub page**, click the green **`< > Code`** button, then choose **Download ZIP**.
-   - _(Alternatively, if you use Git, run `git clone <repository-url>` in a terminal.)_
-2. **Unzip** the downloaded file to somewhere easy to find, e.g. your Desktop. This gives you a project folder (for example `DiGi-Hami-main`) containing:
-   - **`main.cpp`** — the firmware code
-   - the **`data/`** folder — which contains **`animation.gif`** (the hamster animation)
+1. Go to the **[Releases page](https://github.com/IdefixRC/DiGi_Hami/releases/latest)**.
+2. Under **Assets**, download **`DiGi-Hami-v1.0.zip`**.
+3. **Unzip** it somewhere easy to find, e.g. your Desktop. You get a folder named **`DiGi-Hami-v1.0`** containing:
+   - **`platformio.ini`** — the build configuration, already set up for the ESP32-C3 Super Mini
+   - the **`src/`** folder — `main.cpp`, the firmware
+   - the **`data/`** folder — `animation.gif`, the hamster animation
+   - the **`scripts/`** folder — the helper that auto-uploads the animation
    - this **`README.md`** and the `images/` folder
-3. **Remember where you unzipped this folder** — you'll copy the `main.cpp` file and the whole `data/` folder out of it in the steps below. Throughout the rest of this chapter, this unzipped folder is referred to as your **downloaded project folder**.
+
+Throughout the rest of this chapter, this unzipped folder is your **DiGi Hami project folder**.
+
+> _Prefer Git? `git clone https://github.com/IdefixRC/DiGi_Hami.git` gives you the same files. If you're not sure, use the release ZIP._
 
 ### 4.2 Install VS Code
 
@@ -77,81 +82,61 @@ First, grab the code and the animation from this GitHub page.
 3. On Windows, accept the defaults — it's helpful to tick **"Add to PATH"** and **"Add 'Open with Code' action"** during install.
 4. Launch **Visual Studio Code** once it's installed.
 
-### 4.3 Install the PlatformIO Extension
+### 4.3 Install the pioarduino Extension
 
-PlatformIO is the tool that compiles the code and uploads it to the board.
+**pioarduino** is the tool that compiles the code and uploads it to the board. It's a community fork of PlatformIO that keeps up with the current ESP32 chips.
 
 1. In VS Code, click the **Extensions** icon in the left sidebar (four squares) or press `Ctrl+Shift+X` (`Cmd+Shift+X` on macOS).
-2. In the search box, type **`PlatformIO IDE`**.
-3. Click **Install** on the extension published by *PlatformIO*.
-4. Wait for it to finish (it downloads a toolchain in the background — this can take a few minutes). When prompted, **reload / restart VS Code**.
-5. After restarting, you'll see a small **ant/alien head icon** 🐜 in the left sidebar — that's PlatformIO Home.
+2. In the search box, type **`pioarduino`**.
+3. Click **Install** on **"pioarduino IDE"** (publisher: *pioarduino*). Approve **"Trust Publisher & Install"** if asked.
+4. Wait for it to finish (it downloads a small core in the background). When prompted, **reload / restart VS Code**.
+5. After restarting you'll see an **alien-head icon** 👽 in the left sidebar — that's the pioarduino home.
 
-### 4.4 Create the Project
+> ⚠️ **Already have "PlatformIO IDE" installed?** The two extensions clash. Disable or uninstall **PlatformIO IDE** before using pioarduino.
 
-1. Click the **PlatformIO icon** → **Open** → **New Project**.
-2. Fill in the wizard:
-   - **Name:** `DiGiHami`
-   - **Board:** start typing and select **`Espressif ESP32-C3-DevKitM-1`** _(this is a compatible C3 target; the Super Mini uses the same chip)_
-   - **Framework:** **Arduino**
-   - Leave the location default (or pick your own folder).
-3. Click **Finish** and wait for PlatformIO to set up the project (first run downloads the ESP32 platform — give it a few minutes).
+### 4.4 Open the DiGi Hami Project
 
-### 4.5 Configure `platformio.ini`
+1. In VS Code, choose **File → Open Folder…**
+2. Select your **DiGi Hami project folder** (the unzipped `DiGi-Hami-v1.0` folder from step 4.1) and open it.
+3. If VS Code asks whether you trust the authors of the files, choose **Yes, I trust the authors**.
+4. pioarduino recognises it as a project and runs a **one-time setup** — it downloads the ESP32 platform and the three libraries the firmware needs. This can take **a few minutes** on the first open; watch the status bar at the bottom and wait until it's finished.
 
-In the project file list (left sidebar), open **`platformio.ini`** and replace its contents with:
+> There's nothing to create and no code to paste — `platformio.ini` and `src/main.cpp` are already in the folder.
 
-```ini
-[env:esp32-c3-supermini]
-platform = espressif32
-board = esp32-c3-devkitm-1
-framework = arduino
-monitor_speed = 115200
-
-; --- ESP32-C3 Super Mini USB settings ---
-build_flags =
-    -DARDUINO_USB_MODE=1
-    -DARDUINO_USB_CDC_ON_BOOT=1
-
-; --- Libraries used by the sketch ---
-lib_deps =
-    adafruit/Adafruit GFX Library
-    adafruit/Adafruit GC9A01A
-    bitbank2/AnimatedGIF
-```
-
-> The two `build_flags` are important: they enable **USB CDC on boot** so the C3 shows up as a serial port and prints its `Serial` output over USB. The `lib_deps` lines make PlatformIO automatically download the three libraries the code needs (Adafruit GFX, Adafruit GC9A01A, and AnimatedGIF) — no manual library installation required.
-
-### 4.6 Add the Firmware Code
-
-1. In the PlatformIO project's file list, open the **`src/`** folder and open **`main.cpp`**.
-2. Delete the placeholder contents.
-3. Open the **`main.cpp`** from your **downloaded project folder** (from step 4.1), copy **all** of its contents, and **paste** them into the `src/main.cpp` in your PlatformIO project.
-4. Save the file (`Ctrl+S`).
-
-### 4.7 Add the Animation (SPIFFS)
-
-The hamster animation is a GIF that must be uploaded to the board's flash filesystem separately from the code. It's already included in the files you downloaded in step 4.1.
-
-1. Open your **downloaded project folder** (from step 4.1) and locate the **`data`** folder inside it — it contains **`animation.gif`**.
-2. **Copy that entire `data` folder** into your PlatformIO project's **root folder** (the same level as `src`), so the animation ends up at `data/animation.gif`.
-   - _(If you'd rather use your own animation, just replace `animation.gif` — keep the exact filename. The display is **240×240**, so the GIF looks best at 240×240 or smaller; keep the file size modest so it fits in flash.)_
-3. Upload it: click the **PlatformIO icon** → under **Project Tasks → esp32-c3-supermini → Platform**, click **"Upload Filesystem Image"**.
-   - _(The board must be connected via USB-C for this step.)_
-
-### 4.8 Connect the Board and Upload the Code
+### 4.5 Connect the Board
 
 1. Plug the ESP32-C3 Super Mini into your computer with the **USB-C cable**. Use a **data-capable** cable, not a charge-only one.
-2. In the blue bottom bar of VS Code, click the **→ (right arrow) "Upload"** button, or press `Ctrl+Alt+U`.
-3. PlatformIO compiles the code and flashes it automatically. When you see **`SUCCESS`** in the terminal, it's done.
-4. Open the **Serial Monitor** (plug icon in the bottom bar) to watch the log at **115200 baud** — you should see messages like `SPIFFS initialized successfully!` and `Display initialized successfully!`.
+2. On Windows a driver installs automatically the first time — give it a few seconds.
 
-### 4.9 Troubleshooting
+### 4.6 Upload — Firmware + Animation, One Click
+
+1. In the **blue bottom bar** of VS Code, click the **→ (right arrow) "Upload"** button, or press `Ctrl+Alt+U`.
+2. pioarduino runs three things in order:
+   1. compiles the firmware,
+   2. flashes it to the board,
+   3. **automatically uploads the animation** (`data/animation.gif`) straight afterwards — you'll see a second step in the terminal titled *"Uploading filesystem image (data/animation.gif)"*.
+3. When the terminal shows **`SUCCESS`** for **both** the firmware and the filesystem step, DiGi Hami is flashed.
+4. Open the **Serial Monitor** (plug icon in the bottom bar) to watch the log at **115200 baud** — you should see `SPIFFS initialized successfully!`, `Display initialized successfully!`, then `Successfully opened GIF`.
+
+### 4.7 Upload the Animation Manually (Fallback Only)
+
+**You normally don't need this** — step 4.6 uploads the animation for you. Do this only if the serial log shows **`Failed to open GIF file!`** (for example the board re-enumerated too slowly right after the firmware flash).
+
+1. Make sure the board is connected via USB-C.
+2. Open the **pioarduino icon** in the left sidebar → **Project Tasks → esp32-c3-supermini → Platform** → click **"Upload Filesystem Image"**.
+   - _(Equivalent terminal command: `pio run -t uploadfs`.)_
+3. Re-open the Serial Monitor and confirm `Successfully opened GIF`.
+
+> _Want your own animation? Replace `data/animation.gif` with your file — keep the exact name `animation.gif`. The display is **240×240**, so design for 240×240 or smaller and keep the file small so it fits in flash. Then upload again (step 4.6), or use the fallback above._
+
+### 4.8 Troubleshooting
 
 - **No serial port / upload fails:** Try a different USB-C cable (many are charge-only). On the C3 Super Mini you can force bootloader mode: **hold BOOT, tap RESET, release BOOT**, then upload.
+- **Firmware uploads but the animation step fails:** Run the manual fallback in [step 4.7](#47-upload-the-animation-manually-fallback-only). If it keeps happening, unplug and replug the board first so the serial port settles.
 - **Nothing on screen but uploads work:** Double-check the wiring in [Chapter 5](#5-wiring), and if your module has a **BLK** pin, wire it to **3V3**.
-- **`Failed to open GIF file!`:** You forgot step 4.7 — copy the `data` folder into the project and run **"Upload Filesystem Image"**, and make sure the file is named exactly `animation.gif`.
-- **Serial shows nothing:** Confirm `ARDUINO_USB_CDC_ON_BOOT=1` is in `platformio.ini` (it's already in the config above).
+- **`Failed to open GIF file!` in the serial log:** The animation isn't on the board — run [step 4.7](#47-upload-the-animation-manually-fallback-only), and make sure the file is named exactly `animation.gif`.
+- **Serial Monitor shows nothing:** The C3 must enumerate as a USB serial device. This project already sets `ARDUINO_USB_CDC_ON_BOOT=1` in `platformio.ini`, so just make sure you opened the folder from the release rather than recreating the project.
+- **pioarduino setup seems stuck:** Allow the first open up to ~10 minutes on a slow connection. If it truly hangs, use the pioarduino home → **Miscellaneous → Clean**, then reopen the folder.
 
 ---
 
