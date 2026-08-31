@@ -7,3 +7,6 @@
 # VS Code — keep only the shared extension recommendations
 .vscode/*
 !.vscode/extensions.json
+
+# Local working notes/scratch — never goes to GitHub
+.project/
