@@ -28,15 +28,15 @@ I have expanded on the original design by improving the model with a slimmer mes
 
 ## 2. Required Components
 
-| # | Component | Notes | Link |
-|---|-----------|-------|------|
-| 1 | **3D printed parts** | All the printed files for the cage, wheel and tray | Download from the [MakerWorld project page](https://makerworld.com/en/models/3096322-digi-hami-your-digital-desk-hamster-companion) |
-| 2 | **ESP32-C3 Super Mini board** | Get the **pre-soldered (with headers)** version | [AliExpress](https://www.aliexpress.com/item/1005012450719334.html) |
-| 3 | **GC9A01 SPI 1.28″ Round Display, 240×240** | Select the **"1.28 TFT Round"** option | [AliExpress](https://www.aliexpress.com/item/1005008284550510.html) |
-| 4 | **Dupont jumper wires, 10 cm, Female-to-Female** | **Minimum 7 needed** — the linked pack includes 40 | [AliExpress](https://www.aliexpress.com/item/1005008005675778.html) |
-| 5 | **USB-C cable** | For power **and** flashing the ESP32 | [AliExpress](https://www.aliexpress.com/item/1005008819293735.html) |
-| 6 | **Bedding** | Hamster bedding / grass / shredded newspaper / sand to give the base texture. I used fine **aspen shavings** from the pet shop | Local pet shop |
-| 7 | **Glue** | To secure the wheel to the base (CA / super glue or white glue) **and** white glue for the bedding texture | Hardware/craft store |
+| #   | Component                                        | Notes                                                                                                                          | Link                                                                                                                                |
+| --- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **3D printed parts**                             | All the printed files for the cage, wheel and tray                                                                             | Download from the [MakerWorld project page](https://makerworld.com/en/models/3096322-digi-hami-your-digital-desk-hamster-companion) |
+| 2   | **ESP32-C3 Super Mini board**                    | Get the **pre-soldered (with headers)** version                                                                                | [AliExpress](https://www.aliexpress.com/item/1005012450719334.html)                                                                 |
+| 3   | **GC9A01 SPI 1.28″ Round Display, 240×240**      | Select the **"1.28 TFT Round"** option                                                                                         | [AliExpress](https://www.aliexpress.com/item/1005008284550510.html)                                                                 |
+| 4   | **Dupont jumper wires, 10 cm, Female-to-Female** | **Minimum 7 needed** — the linked pack includes 40                                                                             | [AliExpress](https://www.aliexpress.com/item/1005008005675778.html)                                                                 |
+| 5   | **USB-C cable**                                  | For power **and** flashing the ESP32                                                                                           | [AliExpress](https://www.aliexpress.com/item/1005008819293735.html)                                                                 |
+| 6   | **Bedding**                                      | Hamster bedding / grass / shredded newspaper / sand to give the base texture. I used fine **aspen shavings** from the pet shop | Local pet shop                                                                                                                      |
+| 7   | **Glue**                                         | To secure the wheel to the base (CA / super glue or white glue) **and** white glue for the bedding texture                     | Hardware/craft store                                                                                                                |
 
 > 💡 **Tip:** The ESP32-C3 comes in "with headers / soldered" and "unsoldered" variants. Buy the **soldered** one so you can plug the Dupont wires straight on — no soldering iron required.
 
@@ -49,7 +49,7 @@ I have expanded on the original design by improving the model with a slimmer mes
 3. **Glue the wheel to the tray cover.** Use the alignment **pins** to position it correctly, then glue it down.
 4. **Add the bedding texture.** Spread **white glue** over the tray cover plate, sprinkle your chosen bedding on top, and press it in place. Repeat for a second layer if needed — but keep it thin, or it will stick out past the tray sides. Once dry, **trim** any overhang.
 5. **Prepare the ESP32.** Flash the firmware — see [Chapter 4](#4-flashing-the-esp32-beginner-friendly) below. _(And don't forget to follow me on Github 👍)_
-6. **Connect the ESP32 to the display.** Wire it up as shown in [Chapter 5](#5-wiring). **Route the Dupont wires through the slot in the tray cover *before* you connect them** to the display and ESP32.
+6. **Connect the ESP32 to the display.** Wire it up as shown in [Chapter 5](#5-wiring). **Route the Dupont wires through the slot in the tray cover _before_ you connect them** to the display and ESP32.
 7. **Apply power, let him run, enjoy!!!** 🎉 Plug in the USB-C cable and watch your hamster spin. _(Post a picture of your creation, and if you'd like, leave a like / drop a bump 🙏)_
 
 ---
@@ -77,6 +77,8 @@ Throughout the rest of this chapter, this unzipped folder is your **DiGi Hami pr
 
 ### 4.2 Install VS Code
 
+![VS Code download page](images/vscode-install.png)
+
 1. Go to **https://code.visualstudio.com/**.
 2. Download the installer for your operating system (Windows / macOS / Linux) and run it.
 3. On Windows, accept the defaults — it's helpful to tick **"Add to PATH"** and **"Add 'Open with Code' action"** during install.
@@ -84,11 +86,13 @@ Throughout the rest of this chapter, this unzipped folder is your **DiGi Hami pr
 
 ### 4.3 Install the pioarduino Extension
 
+![Installing the pioarduino extension](images/pioarduino-ext.png)
+
 **pioarduino** is the tool that compiles the code and uploads it to the board. It's a community fork of PlatformIO that keeps up with the current ESP32 chips.
 
 1. In VS Code, click the **Extensions** icon in the left sidebar (four squares) or press `Ctrl+Shift+X` (`Cmd+Shift+X` on macOS).
 2. In the search box, type **`pioarduino`**.
-3. Click **Install** on **"pioarduino IDE"** (publisher: *pioarduino*). Approve **"Trust Publisher & Install"** if asked.
+3. Click **Install** on **"pioarduino IDE"** (publisher: _pioarduino_). Approve **"Trust Publisher & Install"** if asked.
 4. Wait for it to finish (it downloads a small core in the background). When prompted, **reload / restart VS Code**.
 5. After restarting you'll see an **alien-head icon** 👽 in the left sidebar — that's the pioarduino home.
 
@@ -110,13 +114,15 @@ Throughout the rest of this chapter, this unzipped folder is your **DiGi Hami pr
 
 ### 4.6 Upload — Firmware + Animation, One Click
 
-1. In the **blue bottom bar** of VS Code, click the **→ (right arrow) "Upload"** button, or press `Ctrl+Alt+U`.
+![The pioarduino toolbar](images/pio-toolbar.png)
+
+1. In the **Top bar** of VS Code, click the **→ (right arrow) "Upload"** button, or press `Ctrl+Alt+U`.
 2. pioarduino runs three things in order:
    1. compiles the firmware,
    2. flashes it to the board,
-   3. **automatically uploads the animation** (`data/animation.gif`) straight afterwards — you'll see a second step in the terminal titled *"Uploading filesystem image (data/animation.gif)"*.
+   3. **automatically uploads the animation** (`data/animation.gif`) straight afterwards — you'll see a second step in the terminal titled _"Uploading filesystem image (data/animation.gif)"_.
 3. When the terminal shows **`SUCCESS`** for **both** the firmware and the filesystem step, DiGi Hami is flashed.
-4. Open the **Serial Monitor** (plug icon in the bottom bar) to watch the log at **115200 baud** — you should see `SPIFFS initialized successfully!`, `Display initialized successfully!`, then `Successfully opened GIF`.
+4. Open the **Serial Monitor** (plug icon in the top toolbar) to watch the log at **115200 baud** — you should see `SPIFFS initialized successfully!`, `Display initialized successfully!`, then `Successfully opened GIF`.
 
 ### 4.7 Upload the Animation Manually (Fallback Only)
 
@@ -124,6 +130,9 @@ Throughout the rest of this chapter, this unzipped folder is your **DiGi Hami pr
 
 1. Make sure the board is connected via USB-C.
 2. Open the **pioarduino icon** in the left sidebar → **Project Tasks → esp32-c3-supermini → Platform** → click **"Upload Filesystem Image"**.
+
+   ![pioarduino Project Tasks → Platform → Upload Filesystem Image](images/pio-project-tasks.png)
+
    - _(Equivalent terminal command: `pio run -t uploadfs`.)_
 3. Re-open the Serial Monitor and confirm `Successfully opened GIF`.
 
@@ -148,16 +157,16 @@ Connect the ESP32-C3 Super Mini to the GC9A01 display with **7 female-to-female 
 
 ### Connection Table
 
-| GC9A01 Display Pin | ESP32-C3 Super Mini Pin | Purpose |
-|:---:|:---:|:---|
-| **VCC** | **3V3** | Power (3.3 V) |
-| **GND** | **GND** | Ground |
-| **SCL** | **GPIO4** | SPI clock (SCLK) |
-| **SDA** | **GPIO6** | SPI data (MOSI) |
-| **RES** | **GPIO1** | Reset |
-| **DC**  | **GPIO3** | Data/Command |
-| **CS**  | **GPIO7** | Chip Select |
-| _BLK_ | _(not connected)_ | Backlight — see note |
+| GC9A01 Display Pin | ESP32-C3 Super Mini Pin | Purpose              |
+| :----------------: | :---------------------: | :------------------- |
+|      **VCC**       |         **3V3**         | Power (3.3 V)        |
+|      **GND**       |         **GND**         | Ground               |
+|      **SCL**       |        **GPIO4**        | SPI clock (SCLK)     |
+|      **SDA**       |        **GPIO6**        | SPI data (MOSI)      |
+|      **RES**       |        **GPIO1**        | Reset                |
+|       **DC**       |        **GPIO3**        | Data/Command         |
+|       **CS**       |        **GPIO7**        | Chip Select          |
+|       _BLK_        |    _(not connected)_    | Backlight — see note |
 
 > ⚠️ **BLK / backlight:** Many GC9A01 modules keep the backlight on with **BLK** left unconnected. If your screen stays black even though the serial log looks fine, connect **BLK → 3V3**.
 
@@ -169,15 +178,13 @@ Connect the ESP32-C3 Super Mini to the GC9A01 display with **7 female-to-female 
 
 ![ESP32-C3 Super Mini](images/esp32_c3_supermini.png)
 
-
 **GC9A01 1.28″ Round Display (240×240)**
 
 ![GC9A01 Display](images/gc9a01_display.png)
 
-
 ### Why these pins?
 
-The pin numbers above come straight from the firmware (`#define TFT_SCLK 4`, `TFT_MOSI 6`, `TFT_CS 7`, `TFT_DC 3`, `TFT_RST 1`). The sketch deliberately **avoids GPIO2, GPIO8 and GPIO9** — these are *strapping pins* on the ESP32-C3 and can interfere with boot if pulled the wrong way at reset. If you change the wiring, update the `#define` lines in the code to match.
+The pin numbers above come straight from the firmware (`#define TFT_SCLK 4`, `TFT_MOSI 6`, `TFT_CS 7`, `TFT_DC 3`, `TFT_RST 1`). The sketch deliberately **avoids GPIO2, GPIO8 and GPIO9** — these are _strapping pins_ on the ESP32-C3 and can interfere with boot if pulled the wrong way at reset. If you change the wiring, update the `#define` lines in the code to match.
 
 ---
 
