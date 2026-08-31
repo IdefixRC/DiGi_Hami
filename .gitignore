@@ -1,0 +1,9 @@
+# PlatformIO / pioarduino build output
+.pio/
+
+# Local Claude Code settings
+.claude/
+
+# VS Code — keep only the shared extension recommendations
+.vscode/*
+!.vscode/extensions.json
