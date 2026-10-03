@@ -29,6 +29,11 @@ File gifFile;
 // Buffer for pixel data (optional, for better performance)
 uint16_t lineBuffer[DISPLAY_WIDTH];
 
+// Offset that centers a GIF smaller than 240x240 on the display.
+// Set in loop() when the GIF is opened, applied in GIFDraw().
+int xOffset = 0;
+int yOffset = 0;
+
 // GIF draw callback function
 void GIFDraw(GIFDRAW *pDraw) {
   uint8_t *s;
@@ -60,7 +65,7 @@ void GIFDraw(GIFDRAW *pDraw) {
       } // while looking for opaque pixels
       if (iCount) { // any opaque pixels?
         tft.startWrite();
-        tft.setAddrWindow(pDraw->iX + x, y, iCount, 1);
+        tft.setAddrWindow(xOffset + pDraw->iX + x, yOffset + y, iCount, 1);
         tft.writePixels(usTemp, iCount);
         tft.endWrite();
         x += iCount;
@@ -82,7 +87,7 @@ void GIFDraw(GIFDRAW *pDraw) {
     for (x=0; x<pDraw->iWidth; x++)
       usTemp[x] = usPalette[*s++];
     tft.startWrite();
-    tft.setAddrWindow(pDraw->iX, y, pDraw->iWidth, 1);
+    tft.setAddrWindow(xOffset + pDraw->iX, yOffset + y, pDraw->iWidth, 1);
     tft.writePixels(usTemp, pDraw->iWidth);
     tft.endWrite();
   }
@@ -122,19 +127,16 @@ int32_t GIFReadFile(GIFFILE *pFile, uint8_t *pBuf, int32_t iLen) {
 
 // Function to seek in GIF file
 int32_t GIFSeekFile(GIFFILE *pFile, int32_t iPosition) {
-  int i = micros();
   File *f = static_cast<File *>(pFile->fHandle);
   f->seek(iPosition);
   pFile->iPos = (int32_t)f->position();
-  i = micros() - i;
   return pFile->iPos;
 }
 
 void setup() {
   Serial.begin(115200);
-  // Note: on the C3 Super Mini, make sure "USB CDC On Boot" is set to
-  // "Enabled" in Tools menu, otherwise Serial output won't show up
-  // over the USB port.
+  // Serial goes out over the C3's USB-C port because platformio.ini sets
+  // ARDUINO_USB_CDC_ON_BOOT=1. Without it, nothing shows up in the monitor.
 
   // Explicitly map the SPI pins - the C3 has no fixed VSPI/HSPI like
   // the classic ESP32, so pins must be assigned via the GPIO matrix.
@@ -164,9 +166,10 @@ void loop() {
   if (gif.open("/animation.gif", GIFOpenFile, GIFCloseFile, GIFReadFile, GIFSeekFile, GIFDraw)) {
     Serial.printf("Successfully opened GIF; Canvas size = %d x %d\n", gif.getCanvasWidth(), gif.getCanvasHeight());
 
-    // Center the GIF on the round display if it's smaller than 240x240
-    int xOffset = (DISPLAY_WIDTH - gif.getCanvasWidth()) / 2;
-    int yOffset = (DISPLAY_HEIGHT - gif.getCanvasHeight()) / 2;
+    // Center the GIF on the round display if it's smaller than 240x240.
+    // A larger GIF keeps its top-left corner at 0,0, as before.
+    xOffset = max(0, (DISPLAY_WIDTH - gif.getCanvasWidth()) / 2);
+    yOffset = max(0, (DISPLAY_HEIGHT - gif.getCanvasHeight()) / 2);
 
     // Play the GIF
     while (gif.playFrame(true, NULL)) {
