@@ -1,5 +1,10 @@
 # 🐹 DiGi Hami — Your Digital Desk Companion
 
+[![Version](https://img.shields.io/badge/version-1.0-4361ee)](https://github.com/IdefixRC/DiGi_Hami/releases)
+[![Platform](https://img.shields.io/badge/platform-ESP32--C3-2ec27e?logo=espressif)](https://www.espressif.com/en/products/socs/esp32-c3)
+[![Arduino](https://img.shields.io/badge/framework-Arduino-00979d?logo=arduino)](https://www.arduino.cc/)
+[![License](https://img.shields.io/badge/license-GPL--3.0-6c757d)](LICENSE)
+
 ![DiGi Hami](images/digihami_hero.jpg)
 
 ## 1. What is DiGi Hami?
